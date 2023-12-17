@@ -1,0 +1,106 @@
+@import '../styleVarables/styleVarables.scss';
+
+.siderMobile{
+  color : $primeryText;
+	font-family:'Open Sans', sans-serif;
+	font-weight: 600;
+  font-size: 13px;
+  width: 100%;
+  padding: 10px;
+  background-color: $mainBackground;
+  border-radius: 5px;
+  box-shadow: $mainBoxShadow;
+
+  .siderMobile__title{
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .siderMobile__filters{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 40px;
+
+
+    label{
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      transition-duration: 0.2s;
+      padding-left: 1.2em;
+
+      &:hover {
+        background-color: $checkboxHover;
+      }
+
+      &:before {
+
+      }
+
+      input{
+        position: absolute;
+        appearance: none;
+      }
+
+      input:checked + .cusomCheckbox{
+        background-image: url(img/checkedBox.svg);
+      }
+
+      .cusomCheckbox{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-image: url(img/unCheckedBox.svg);
+        margin-left: -1.2em;
+      }
+      span{
+        margin-left: 10px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@media (min-width : 765px) {
+  .siderMobile{
+    padding : 5px 0;
+  
+    .siderMobile__title{
+      font-size: 12px;
+      letter-spacing: 0;
+      margin: 10px
+    }
+  
+    .siderMobile__filters{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-auto-rows: 40px;
+  
+  
+      label{
+        padding-left: 35px;
+  
+        &:hover {
+        }
+  
+        input{}
+
+        input:checked + .cusomCheckbox{
+          background-image: url(img/checkedBox.svg);
+        }
+
+        .cusomCheckbox{
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background-image: url(img/unCheckedBox.svg);
+        }
+        span{
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

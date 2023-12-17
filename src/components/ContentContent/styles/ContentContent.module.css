@@ -1,0 +1,21 @@
+.layoutSidebar{
+  min-height: 100px;
+  line-height: 120px;
+  font-size: 13px;
+  line-height: 1.53;
+  font-weight: 400;
+  background-color: #E5E5E5 !important;
+  display: block;
+}
+
+@media (min-width : 765px) {
+  .layoutSidebar{
+    min-height: 100px;
+    line-height: 120px;
+    font-size: 13px;
+    line-height: 1.53;
+    font-weight: 400;
+    background-color: #E5E5E5 !important;
+    display: none;
+  }
+}

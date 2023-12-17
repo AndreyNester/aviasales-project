@@ -1,0 +1,47 @@
+@import '../styleVarables/styleVarables.scss';
+
+.ticket__infoItem {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  font-family: $mainFont;
+  font-weight: 600;
+
+  .option{
+
+    &.transfer {
+      flex-grow: 0.3;
+    }
+
+    h3{
+      color : $secondaryText;
+      font-size: 13px;
+      text-align: left;
+    }
+    div{
+      margin-top: 5px;
+      color : $primeryText;
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+}
+
+@media (min-width : 756px) {
+  .ticket__infoItem {
+  
+    .option{
+  
+      &.transfer {
+      }
+  
+      h3{
+        font-size: 12px;
+      }
+      div{
+        font-size: 14px;
+      }
+    }
+  }
+}
