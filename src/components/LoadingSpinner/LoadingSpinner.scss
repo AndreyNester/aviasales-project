@@ -1,0 +1,10 @@
+@import '../styleVarables/styleVarables.scss';
+
+.loadingSpinner {
+  margin-top: 20px;
+  color: $accentColor;
+
+  i{
+    background-color: $accentColor !important;
+  }
+}

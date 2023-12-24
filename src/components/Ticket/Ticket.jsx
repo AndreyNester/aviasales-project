@@ -1,18 +1,29 @@
 /* eslint-disable import/order */
+import classNames from 'classnames';
+
 import TicketInfoList from '../TicketInfoList/TicketInfoList';
 import './Ticket.scss';
-import logotype from './img/logoAirLines.png';
 
-function Ticket() {
+function Ticket(props) {
+  const {
+    el: { price, carrier, segments },
+  } = props;
+
+  const classNamesImg = classNames({
+    ticket__imgField: true,
+    [carrier]: true,
+  });
+
   return (
-    <div className="ticket">
+    <li className="ticket">
       <header className="ticket__header">
-        <span className="ticket__price">13 400 Р</span>
-        <img src={logotype} alt="logotyle Airlines" />
+        <span className="ticket__price">{price} P</span>
+
+        <div className={classNamesImg}> </div>
       </header>
-      <TicketInfoList />
-      <TicketInfoList />
-    </div>
+      <TicketInfoList segments={segments[0]} />
+      <TicketInfoList segments={segments[1]} />
+    </li>
   );
 }
 

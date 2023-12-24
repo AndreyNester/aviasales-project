@@ -1,10 +1,11 @@
 import TicketInfoItem from '../TicketInfoItem/TicketInfoItem';
 import './TicketInfoList.scss';
 
-function TicketInfoList() {
+function TicketInfoList(props) {
+  const { segments } = props;
   return (
     <ul className="ticket__infoList">
-      <TicketInfoItem />
+      <TicketInfoItem segments={segments} />
     </ul>
   );
 }

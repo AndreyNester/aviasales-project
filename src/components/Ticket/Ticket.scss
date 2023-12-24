@@ -1,7 +1,5 @@
 @import '../styleVarables/styleVarables.scss';
 
-
-
 .ticket {
   margin-top: 15px;
   padding: 10px;
@@ -21,6 +19,40 @@
       font-size: 20px;
       font-family: $mainFont;
       font-weight: 600;
+    }
+
+    .ticket__imgField{
+      
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 25%;
+      width: 125px;
+      height: inherit;
+
+      &.AK{
+        background-image: url('./img/AK.png');
+      }
+      &.BT{
+        background-image: url('./img/BT.jpg');
+      }
+      &.DP{
+        background-image: url('./img/DP.png');
+      }
+      &.FV{
+        background-image: url('./img/FV.png');
+      }
+      &.S7{
+        background-image: url('./img/S7.png');
+      }
+      &.U6{
+        background-image: url('./img/U6.jpg');
+      }
+      &.UT{
+        background-image: url('./img/UT.jpg');
+      }
+      &.W6{
+        background-image: url('./img/W6.png');
+      }
     }
   }
   

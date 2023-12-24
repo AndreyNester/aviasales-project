@@ -34,30 +34,6 @@
   
 }
 
-.layoutSidebar{
-  padding : 10px;
-  min-height: 50px;
-  line-height: 120px;
-  font-size: 13px;
-  line-height: 1.53;
-  font-weight: 400;
-  background-color: #F3F7FA !important;
-}
-
-
-.layoutSidebarDesktop{
-  display: none;
-  background-color: #F3F7FA !important;
-}
-
-
-.layoutContentWrapper{
-    padding : 10px;
-  text-align: center;
-  min-height: 120px;
-  color: #fff;
-  background-color: #F3F7FA;
-}
 
 
 @media (min-width : 765px) {
@@ -69,7 +45,4 @@
     background: #F3F7FA;
   }
 
-  .layoutSidebarDesktop{
-     display: block;
-   } 
  }

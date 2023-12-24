@@ -1,25 +1,27 @@
 import { Flex, Layout } from 'antd';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import style from './App.module.css';
 import './commonStyles/reset/reset.css';
-import ContentContent from './components/ContentContent/ContentContent';
 import HeaderContent from './components/HeaderContent/HeaderContent';
-import SiderList from './components/SiderList/SiderList';
+import LayoutBody from './components/LayoutBody/LayoutBody';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 import './components/SiderList/SiderList.scss';
+import { fetchGuestId } from './store/loadingGuestSession/loadingGuestSession.slice';
 
-const { Header, Sider, Content } = Layout;
+const { Header } = Layout;
 
 function App() {
-  const {
-    app,
-    layoutFlex,
-    layoutWrapper,
-    layoutHeader,
-    layoutBody,
-    layoutSidebar,
-    layoutSidebarDesktop,
-    layoutContentWrapper,
-  } = style;
+  const { app, layoutFlex, layoutWrapper, layoutHeader } = style;
+
+  const guestLoaded = useSelector((state) => state.reducers.createGuestId.loaded);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGuestId());
+  }, []);
 
   return (
     <div className={app}>
@@ -28,14 +30,7 @@ function App() {
           <Header className={layoutHeader}>
             <HeaderContent />
           </Header>
-          <Layout className={layoutBody}>
-            <Sider width="30%" className={`${layoutSidebar} ${layoutSidebarDesktop}`}>
-              <SiderList />
-            </Sider>
-            <Content className={layoutContentWrapper}>
-              <ContentContent />
-            </Content>
-          </Layout>
+          {guestLoaded ? <LayoutBody /> : <LoadingSpinner />}
         </Layout>
       </Flex>
     </div>

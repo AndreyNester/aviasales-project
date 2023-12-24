@@ -1,10 +1,22 @@
+import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
+
+import { actions } from '../../store/shownList/shownList.slice';
 import './ShowMoreBtn.scss';
 
-function ShowMoreBtn() {
+function ShowMoreBtn(props) {
+  const { value, disabled } = props;
+  const dispatch = useDispatch();
   return (
-    <button type="button" className="ShowMoreBtn">
-      Показать еще 5 билетов
-    </button>
+    <Button
+      type="primary"
+      block
+      className="ShowMoreBtn"
+      onClick={() => dispatch(actions.showMore())}
+      disabled={disabled}
+    >
+      {value}
+    </Button>
   );
 }
 
