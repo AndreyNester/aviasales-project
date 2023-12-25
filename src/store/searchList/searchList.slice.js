@@ -7,8 +7,11 @@ import serachListFilterAndSort from './searchListSort/serachListFilterAndSort';
 
 const initialState = {
   list: [],
+  globList: [],
   status: null,
   error: null,
+  started: false,
+  downloaded: 0,
 };
 
 export const fetchSearch = createAsyncThunk('searchListSlice/fetchSearch', async function (action) {
@@ -30,14 +33,21 @@ export const searchListSlice = createSlice({
       state.list = [];
       state.status = 'loading';
       state.error = null;
+      state.started = true;
     });
     builder.addCase(fetchSearch.fulfilled, (state, action) => {
-      state.status = 'resolved';
-      state.list = serachListFilterAndSort(action.payload);
+      // console.log(action.payload.responce.stop);
+      if (!action.payload.responce.stop) {
+        state.status = 'loading';
+        state.list = [...state.list, serachListFilterAndSort(action.payload)];
+        state.globList = [...state.globList, [...action.payload.responce.tickets]];
+        state.downloaded += 1;
+      } else {
+        state.status = 'resolved';
+      }
     });
     builder.addCase(fetchSearch.rejected, (state) => {
-      state.status = 'rejected';
-      state.list = [];
+      state.globList = [...state.globList];
     });
   },
 });

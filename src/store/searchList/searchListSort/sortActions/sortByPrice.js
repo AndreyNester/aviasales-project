@@ -1,5 +1,5 @@
 function sortByPrice(tickets) {
-  return tickets.sort((a, b) => a.price - b.price);
+  return [...tickets.sort((a, b) => a.price - b.price)];
 }
 
 export default sortByPrice;
