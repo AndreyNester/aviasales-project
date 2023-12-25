@@ -13,19 +13,13 @@ import SiderList from '../SiderList/SiderList';
 import '../SiderList/SiderList.scss';
 import SuccessSearch from '../SuccessSearch/SuccessSearch';
 import Switcher from '../Switcher/Switcher';
-import TicketList from '../TicketList/TicketList';
+// import TicketList from '../TicketList/TicketList';
 import styles from './styles/ContentContent.module.css';
 import './styles/ContentContent.scss';
 
 function ContentContent() {
   const { layoutSidebar } = styles;
-  const {
-    status: searchStatus,
-    list,
-    globList,
-    started,
-    downloaded,
-  } = useSelector((state) => state.reducers.searchList);
+  const { status: searchStatus, globList, started, downloaded } = useSelector((state) => state.reducers.searchList);
   const { currentBunch, agregatedList } = useSelector((state) => state.reducers.shownList);
 
   const sessionId = useSelector((state) => state.reducers.createGuestId.guestId);
@@ -35,10 +29,10 @@ function ContentContent() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (downloaded === 1) dispatch(actions.resetList({ list }));
-  }, [list]);
+    if (downloaded === 1) {
+      dispatch(actions.showMore({ globList }));
+    }
 
-  useEffect(() => {
     if (searchStatus !== 'resolved' && started) {
       dispatch(fetchSearch({ sessionId, switcherStatus, filtersStatus }));
     }
