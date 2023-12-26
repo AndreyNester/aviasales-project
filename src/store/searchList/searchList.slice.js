@@ -6,7 +6,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   globList: [],
   status: null,
-  error: null,
+  noErrors: true,
   started: false,
   downloaded: 0,
 };
@@ -29,7 +29,6 @@ export const searchListSlice = createSlice({
     builder.addCase(fetchSearch.pending, (state) => {
       state.list = [];
       state.status = 'loading';
-      state.error = null;
       state.started = true;
     });
     builder.addCase(fetchSearch.fulfilled, (state, action) => {
@@ -38,12 +37,14 @@ export const searchListSlice = createSlice({
         state.status = 'loading';
         state.globList = [...state.globList, [...action.payload.responce.tickets]];
         state.downloaded += 1;
+        state.noErrors = true;
       } else {
         state.status = 'resolved';
       }
     });
     builder.addCase(fetchSearch.rejected, (state) => {
       state.globList = [...state.globList];
+      state.noErrors = false;
     });
   },
 });

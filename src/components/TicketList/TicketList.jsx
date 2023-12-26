@@ -3,6 +3,7 @@ import './TicketList.scss';
 
 function TicketList(props) {
   const { list } = props;
+  console.log(list);
   return (
     <ul className="ticketList">
       {list.map((el) => (
