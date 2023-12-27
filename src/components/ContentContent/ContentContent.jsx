@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchSearch } from '../../store/searchList/searchList.slice';
 import { actions } from '../../store/shownList/shownList.slice';
+import NoFound from '../NoFound/NoFound';
 import SearchBtnGroup from '../SearchBtnGroup/SearchBtnGroup';
 import ShowMoreBtn from '../ShowMoreBtn/ShowMoreBtn';
 import SiderList from '../SiderList/SiderList';
@@ -44,6 +45,10 @@ function ContentContent() {
     }
   }, [globList]);
 
+  useEffect(() => {
+    dispatch(actions.peresort({ switcherStatus, globList, filtersStatus }));
+  }, [switcherStatus, filtersStatus]);
+
   return (
     <>
       <Sider width="100%" className={layoutSidebar}>
@@ -54,11 +59,15 @@ function ContentContent() {
       {searchStatus === 'loading' && <Spin size="large" className="cotentContent__loadingSpin" />}
       {searchStatus === 'resolved' && <SuccessSearch />}
       {agregatedListT.length ? <TicketList list={agregatedListT[currentBunch]} /> : null}
+
+      {agregatedListT.length ? !agregatedListT[0].length && searchStatus === 'resolved' && <NoFound /> : null}
       {agregatedListT.length
-        ? currentBunch < agregatedListT.length - 1 && <ShowMoreBtn value="Показать еще 5 билетов" />
+        ? currentBunch < agregatedListT.length - 1 &&
+          agregatedListT[0].length && <ShowMoreBtn value="Показать еще 5 билетов" />
         : null}
       {agregatedListT.length
-        ? currentBunch === agregatedListT.length - 1 && <ShowMoreBtn value="Список билетов кончился" disabled />
+        ? currentBunch === agregatedListT.length - 1 &&
+          agregatedListT[0].length && <ShowMoreBtn value="Список билетов кончился" disabled />
         : null}
     </>
   );

@@ -7,7 +7,6 @@ import sortTickets from './sortTickets';
 function serachListFilterAndSort(data) {
   // eslint-disable-next-line no-unused-vars
   const { filtersStatus, globList, switcherStatus } = data;
-  console.log(data.globList);
 
   const newArr = globList.map((el) => {
     return {

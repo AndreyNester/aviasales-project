@@ -23,8 +23,6 @@ function App() {
     dispatch(fetchGuestId());
   }, []);
 
-  console.log(useSelector((state) => state.reducers));
-
   return (
     <div className={app}>
       <Flex className={layoutFlex} gap="middle" wrap="wrap">
