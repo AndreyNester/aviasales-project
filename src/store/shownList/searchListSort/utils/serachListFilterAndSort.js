@@ -14,7 +14,6 @@ function serachListFilterAndSort(data) {
       id: uniqid(),
     };
   });
-
   const filteredTickets = filterTickets(newArr, filtersStatus);
   const sortedTickets = sortTickets(switcherStatus, filteredTickets);
 

@@ -17,6 +17,7 @@ import Switcher from '../Switcher/Switcher';
 import TicketList from '../TicketList/TicketList';
 import styles from './styles/ContentContent.module.css';
 import './styles/ContentContent.scss';
+import appropriateList from './utils/appropriateList';
 
 function ContentContent() {
   const { layoutSidebar } = styles;
@@ -46,8 +47,14 @@ function ContentContent() {
   }, [globList]);
 
   useEffect(() => {
-    dispatch(actions.peresort({ switcherStatus, globList, filtersStatus }));
-  }, [switcherStatus, filtersStatus]);
+    dispatch(actions.newFilterOn({ switcherStatus, globList, filtersStatus }));
+  }, [filtersStatus]);
+
+  useEffect(() => {
+    dispatch(actions.newSortOn({ switcherStatus }));
+  }, [switcherStatus]);
+
+  const actiallyList = appropriateList(agregatedListT, currentBunch);
 
   return (
     <>
@@ -58,7 +65,7 @@ function ContentContent() {
       <SearchBtnGroup />
       {searchStatus === 'loading' && <Spin size="large" className="cotentContent__loadingSpin" />}
       {searchStatus === 'resolved' && <SuccessSearch />}
-      {agregatedListT.length ? <TicketList list={agregatedListT[currentBunch]} /> : null}
+      {agregatedListT.length ? <TicketList list={actiallyList} /> : null}
 
       {agregatedListT.length ? !agregatedListT[0].length && searchStatus === 'resolved' && <NoFound /> : null}
       {agregatedListT.length

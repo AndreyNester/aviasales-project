@@ -4,6 +4,7 @@ import sortBySpeed from './sortActions/sortBySpeed';
 
 const sortTickets = (switcherStatus, filteredTickets) => {
   const tickets = filteredTickets;
+
   switch (switcherStatus) {
     case 10: // самый дешевый
       return sortByPrice(tickets);
