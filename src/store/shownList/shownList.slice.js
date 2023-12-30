@@ -8,13 +8,14 @@ import { createSlice } from '@reduxjs/toolkit';
 // eslint-disable-next-line import/order
 import { fetchSearch } from '../searchList/searchList.slice';
 import serachListFilterAndSort from './searchListSort/serachListFilterAndSort';
-// import { resetListAction } from './shownListActions/resetListAction';
+import sortTickets from './searchListSort/sortTickets';
 import { showMoreAction } from './shownListActions/showMoreACtion';
 
 const initialState = {
   currentBunch: 0,
   totalList: [],
   agregatedList: [],
+  totalFilteredList: [],
   agregatedListT: [],
 };
 
@@ -24,18 +25,23 @@ export const shownListSlice = createSlice({
   reducers: {
     addSortedArr: (state, action) => {
       state.agregatedListT = [...state.agregatedListT, [...serachListFilterAndSort(action.payload).slice(0, 5)]];
+      state.totalFilteredList = state.agregatedListT;
     },
     showMore: (state) => showMoreAction(state),
-    // resetList: (state, action) => resetListAction(state, action),
-    // peresort: (state, action) => {},
 
-    peresort: (state, action) => {
-      // const { switcherStatus, globList, filtersStatus } = action.payload;
+    newFilterOn: (state, action) => {
       const { filtersStatus, globList, switcherStatus } = action.payload;
       state.currentBunch = 0;
-      state.agregatedListT = globList.map((el) => {
-        return serachListFilterAndSort({ filtersStatus, globList: el, switcherStatus }).slice(0, 5);
-      });
+      state.totalFilteredList = globList.map((el) =>
+        serachListFilterAndSort({ filtersStatus, globList: el, switcherStatus })
+      );
+      state.agregatedListT = state.totalFilteredList.map((el) => el.slice(0, 5));
+    },
+    newSortOn: (state, action) => {
+      state.currentBunch = 0;
+      state.agregatedListT = state.totalFilteredList.map((el) =>
+        sortTickets(action.payload.switcherStatus, el).slice(0, 5)
+      );
     },
   },
   extraReducers: (builder) => {

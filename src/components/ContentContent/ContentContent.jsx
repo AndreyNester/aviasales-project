@@ -45,9 +45,15 @@ function ContentContent() {
     }
   }, [globList]);
 
+  // const filteredList = useMemo(()=>, [filtersStatus]);
+
   useEffect(() => {
-    dispatch(actions.peresort({ switcherStatus, globList, filtersStatus }));
-  }, [switcherStatus, filtersStatus]);
+    dispatch(actions.newFilterOn({ switcherStatus, globList, filtersStatus }));
+  }, [filtersStatus]);
+
+  useEffect(() => {
+    dispatch(actions.newSortOn({ switcherStatus }));
+  }, [switcherStatus]);
 
   return (
     <>
