@@ -1,7 +1,7 @@
 import './noFound.scss';
 
 function NoFound() {
-  return <div className="noFoundMes">Похоже ничего нет по такому запросу :\ </div>;
+  return <div className="noFoundMes">По заданным фильтрам ничего не найдено</div>;
 }
 
 export default NoFound;

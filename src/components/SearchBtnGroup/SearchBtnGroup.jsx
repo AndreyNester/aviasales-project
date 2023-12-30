@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { SearchOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchSearch } from '../../store/searchList/searchList.slice';
@@ -13,16 +14,20 @@ function SearchBtnGroup() {
   const sessionId = useSelector((state) => state.reducers.createGuestId.guestId);
   const switcherStatus = useSelector((state) => state.reducers.switcher);
   const filtersStatus = useSelector((state) => state.reducers.checkboxFilter);
-  const { status: searchStatus } = useSelector((state) => state.reducers.searchList);
+  const { status: searchStatus, started } = useSelector((state) => state.reducers.searchList);
+
+  const classnamesOfSearchBtnGroup = classNames({
+    contentContent__Btn: true,
+    hidden: started,
+  });
 
   return (
     <Button
-      className="contentContent__Btn"
+      className={classnamesOfSearchBtnGroup}
       type="primary"
       onClick={() => dispatch(fetchSearch({ sessionId, switcherStatus, filtersStatus }))}
       icon={<SearchOutlined />}
       loading={searchStatus === 'loading'}
-      disabled={searchStatus === 'resolved'}
     >
       Search
     </Button>
